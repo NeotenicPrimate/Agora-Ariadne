@@ -10,77 +10,78 @@ Navigating the graph from and to any point, and gathering the relevant data on t
 uvicorn main:app --reload
 ```
 
-Down:
+Top Down:
 ```
 query {
-  country(name: "France") {
-    type
-    id
-    name
-    gdp
-    children {
-      type
-      id
-      name
-      unemployement_rate
-      children {
-          id
-          name
-          population
-          average_income
-      }
+    country(name: "France") {
+        type
+        id
+        name
+        gdp
+        children {
+            type
+            id
+            name
+            unemployement_rate
+            children {
+                id
+                name
+                population
+                average_income
+            }
+        }
     }
-  }
 }
 ```
 
-Up:
+Bottom Up:
 ```
 query {
-  commune(name: "Vauvenargues") {
-    type
-    id
-    name
-    population
-    average_income
-    parent {
-      type
-      id
-      name
-      unemployement_rate
-      parent {
-          id
-          name
-          average_education
-      }
+    commune(name: "Vauvenargues") {
+        type
+        id
+        name
+        population
+        average_income
+        parent {
+            type
+            id
+            name
+            unemployement_rate
+            parent {
+                type
+                id
+                name
+                average_education
+            }
+        }
     }
-  }
 }
 ```
 
 Nodes and links:
 ```
 {
-  "nodes": [ 
-      { 
-        "id": "id1",
-        "name": "name1",
-        "val": 1 
-      },
-      { 
-        "id": "id2",
-        "name": "name2",
-        "val": 10 
-      },
-      (...)
-  ],
-  "links": [
-      {
-          "source": "id1",
-          "target": "id2"
-      },
-      (...)
-  ]
+    "nodes": [ 
+        { 
+          "id": "id1",
+          "name": "name1",
+          "val": 1 
+        },
+        { 
+          "id": "id2",
+          "name": "name2",
+          "val": 10 
+        },
+        (...)
+    ],
+    "links": [
+        {
+            "source": "id1",
+            "target": "id2"
+        },
+        (...)
+    ]
 }
 ```
 
@@ -123,5 +124,6 @@ Tree:
                 }
             ]
         }
+    ]
 }
 ```
