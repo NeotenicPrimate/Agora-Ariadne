@@ -1,9 +1,6 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-**/__pycache__
-
 # Environments
 venv
+.env
+*.DS_Store
+*.vscode
+**/__pycache__
