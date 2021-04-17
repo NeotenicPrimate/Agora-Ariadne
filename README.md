@@ -1,6 +1,6 @@
 # Agora
-Data Graph
-GraphQL
+• European Data Graph
+• GraphQL
 
 ## Navigating the Graph
 Navigating the graph from and to any point, and gathering the relevant data on the way.
