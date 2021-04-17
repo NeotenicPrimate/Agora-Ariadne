@@ -9,12 +9,16 @@ query {
   Country(name: "France") {
     id
     name
+    gdp
     regions {
       id
       name
+      unemployement_rate
       departements {
           id
           name
+          population
+          average_income
       }
     }
   }
