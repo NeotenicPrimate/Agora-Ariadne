@@ -3,7 +3,7 @@
 • GraphQL <br>
 
 
-![Alt text](/images/schema.png?raw=true "France's Schema")
+![Alt text](/images/schema.png?raw=true "Schema")
 
 ## Navigating the Graph
 Navigating the graph from and to any point, and gathering the relevant data on the way.
