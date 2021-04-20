@@ -5,6 +5,13 @@
 
 ![Alt text](/images/schema.png?raw=true "Schema")
 
+## Todo
+• Interfaces - GraphQL <br>
+• Filtering - GraphQL <br>
+• Input root node - Networkx/Cypher <br>
+• Query parent-child with property - Cypher <br>
+• Query subset {departement} not working - Cypher <br>
+
 ## Navigating the Graph
 Navigating the graph from and to any point, and gathering the relevant data on the way.
 

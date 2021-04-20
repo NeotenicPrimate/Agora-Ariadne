@@ -77,7 +77,6 @@ class Departement(StructuredNode):
 
     communes = RelationshipTo('Commune', 'COMMUNE')
 
-
 class Epci(StructuredNode):
     id_1 = UniqueIdProperty()
     id_2 = UniqueIdProperty()
