@@ -1,6 +1,8 @@
 from neomodel import StructuredNode, RelationshipTo, RelationshipFrom, UniqueIdProperty, StringProperty, JSONProperty, DateTimeProperty
 
-class World(StructuredNode):
+class Admin(StructuredNode):
+    __abstract_node__ = True
+
     id_1 = UniqueIdProperty()
     id_2 = UniqueIdProperty()
     code = UniqueIdProperty()	
@@ -9,104 +11,50 @@ class World(StructuredNode):
     geometry = JSONProperty(required = True)	
     level = StringProperty(required = True)	
 
+
+class World(Admin):
     groups = RelationshipTo('Group', 'GROUP')
     countries = RelationshipTo('Country', 'COUNTRY')
 
-class Group(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
+class Group(Admin):
+    world = RelationshipFrom('World', 'Group')
 
     countries = RelationshipTo('Country', 'COUNTRY')
 
-class Country(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
-    
+class Country(Admin):
+    group = RelationshipFrom('Group', "COUNTRY")
+    world = RelationshipFrom('World', "COUNTRY")
+
     regions = RelationshipTo('Region', 'REGION')
     collectivites = RelationshipTo('Collectivite', 'COLLECTIVITE')
 
-class Collectivite(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
+class Collectivite(Admin):
+    country = RelationshipFrom('Country', "COLLECTIVITE")
 
-class Region(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
+class Region(Admin):
+    country = RelationshipFrom('Country', 'REGION')
 
     departements = RelationshipTo('Departement', 'DEPARTEMENT')
 
-class Subset(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
-
+class Subset(Admin):
     departements = RelationshipTo('Departement', 'DEPARTEMENT')
     
-class Departement(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
+class Departement(Admin):
+    subset = RelationshipFrom('Subset', 'DEPARTEMENT')
+    region = RelationshipFrom('Region', 'DEPARTEMENT')
 
     communes = RelationshipTo('Commune', 'COMMUNE')
 
-class Epci(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
-
+class Epci(Admin):
     communes = RelationshipTo('Commune', 'COMMUNE')
     
-class Arrondissement(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
-
+class Arrondissement(Admin):
     communes = RelationshipTo('Commune', 'COMMUNE')
 
-class Commune(StructuredNode):
-    id_1 = UniqueIdProperty()
-    id_2 = UniqueIdProperty()
-    code = UniqueIdProperty()	
-    name = StringProperty(required = True)	
-    validity = DateTimeProperty()
-    geometry = JSONProperty(required = True)	
-    level = StringProperty(required = True)	
+class Commune(Admin):
+    departement = RelationshipFrom('Departement', 'COMMUNE')
+    arrondissement = RelationshipFrom('Arrondissement', 'COMMUNE')
+    epci = RelationshipFrom('Epci', 'COMMUNE')
 
     users = RelationshipTo('User', 'USER')
 
