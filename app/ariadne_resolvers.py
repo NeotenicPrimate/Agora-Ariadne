@@ -127,7 +127,9 @@ def resolve_groups(*_):
 def resolve_countries(*_, name):
     return Country.nodes.first_or_none(name=name).__properties__
 @query.field("countries")
-def resolve_countries(*_):
+def resolve_countries(*_, name=None):
+    if name:
+        return Country.nodes.first_or_none(name=name).__properties__
     return [c.__properties__ for c in Country.nodes.all()]
 
 @query.field("region")
